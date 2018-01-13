@@ -177,10 +177,9 @@ BIW04011和BOW04041 添加 Barcode 字段
 
 
 list.clear();
-						list_new=getsource();
-						list.addAll(list_new);
-						lvadapter.notifyDataSetChanged();
-						m_spiModel.setAdapter(adapter);//将adapter 添加到spinner中    
+list_new=getsource();
+list.addAll(list_new);						lvadapter.notifyDataSetChanged();
+m_spiModel.setAdapter(adapter);//将adapter 添加到spinner中    
 
 
 工单统计
