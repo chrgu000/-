@@ -1,0 +1,603 @@
+
+
+
+
+key:gmZ6rfR+78th+N5/uRKmRR5xuXmkI75jumPXSeVhWV+L6J3z5HntyA==
+serial:2018010107583425_1748
+codeid:S.4166;0200   或者S.4166;0107
+
+
+
+发布文件：BHD
+发布内容：项目属性维护→新增是否追踪下拉框
+发布人员：胡元元
+
+
+1，添加一个方法获取当前评估表下哪些元素是多选并排序
+
+2，添加一个方法获取当前评估表下一共有几个多选项；
+
+3，如何插入AddEvaluationSheets到这个方法上；
+目前value值 S.410300,01|S.410301,02
+
+
+
+
+
+public void updateData(){
+		String nameSpace = conn.nameSpace;
+		String url = conn.endPoint;
+		String methodName = "GetEvaluationSheetCateByAdmin";
+
+		soapUtil = SoapUtil.getInstance(this);
+		soapUtil.setDotNet(true);
+		SoapParams params = new SoapParams();
+		params.put("Key", myApp.getName());
+		params.put("serialnumber",myApp.getSeriScore());
+		soapUtil.call(url, nameSpace, methodName, params, listener);
+	}
+	SoapListener listener = new SoapListener() {
+
+		@Override
+		public void onSuccess(int statusCode, SoapObject object) {
+			SoapObject soap1=(SoapObject)object.getProperty(0);  
+			SoapObject childs=(SoapObject)soap1.getProperty(1);  
+			SoapObject soap2=(SoapObject)childs.getProperty(0); 
+			list.clear();
+			new_list.clear();
+			for(int j=0;j<soap2.getPropertyCount();j++){
+				SoapObject soap3=(SoapObject)soap2.getProperty(j);
+				String codeID=soap3.getProperty(0).toString();
+				String s=getIsEvaluate(myApp.getName(),myApp.getSeriScore(),codeID);
+				//String s="0";
+				
+				HashMap<String, String> hashMap = new HashMap<String, String>();
+				if(s.equals("0")){
+					hashMap.put("S_Id", soap3.getProperty(1).toString());
+				}else{
+					hashMap.put("S_Id", soap3.getProperty(1).toString()+"(√)");
+				}
+				hashMap.put("S_Bed", soap3.getProperty(0).toString());
+				hashMap.put("S_Leaf", soap3.getProperty(2).toString());
+				list.add(hashMap);
+				
+			}
+			
+			new_list.equals(list);
+			list.addAll(new_list);
+			adapter.notifyDataSetChanged();
+			listview.setAdapter(adapter);
+			
+		}
+
+		@Override
+		public void onFailure(int statusCode, String content, Throwable error) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onFailure(int statusCode, SoapFault fault) {
+			// TODO Auto-generated method stub
+			
+		}
+	};
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        String date=getsourceArray(myApp.name,myApp.getSeriScore())[2];
+//        if(date.length()>0&&!TextUtils.isEmpty(date)){
+//        	tv1.setText(getsourceArray(myApp.name,myApp.getSeriScore())[0]+"("+date.substring(0, 10)+")");
+//        }else{
+//        	tv1.setText(getsourceArray(myApp.name,myApp.getSeriScore())[0]);
+//        }
+        
+        //listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        //adapter=new ArrayAdapter<String>(ScoreType.this,R.layout.scoretypeitemlist,R.id.pid,getsource());
+
+
+医院外网：http://192.168.11.5:8086
+医院内网：http://192.168.2.103:8086
+4G网：http://218.93.252.183:8086
+或者www.healthyperson.cn:8086
+ps:医院外网地址（11.5）打不开，就用4G网地址，记得收藏。
+
+
+WebService需求说明
+1，GetInpatientInfo_Only 和 GetInpatientInfo_Only_ByEmpID两个方法按照床号排序
+2，<入院评估表分类 diffgr:id="入院评估表分类8" msdata:rowOrder="7" diffgr:hasChanges="inserted">
+<CODEID>S.4166;0107</CODEID>
+<CODENAME>疼痛评估</CODENAME>
+<LEAF>0</LEAF>
+</入院评估表分类>
+能否新建一个方法，让我根据CODEID获取LEAF值，这样速度至少快1倍。
+3，GetOrdsInfo_Cate 医嘱按照时间排序
+
+DB2需求说明
+1，BHD04010 添加 TraceOrNot字段
+BIW04011和BOW04041 添加 Barcode 字段
+
+2017-12-21 胡元元
+
+
+
+张三 您好，请在  时间   到  地点    参加  课程名称
+
+张三您好，请在2017-12-13 08:20:00参加护理培训。
+(${变量1$})您好，请在2017-12-13 08:20:00参加护理培训。
+
+(${变量1$})您好，请在(${变量2$})参加(${变量3$})。
+
+5272718510006|张三|时间|地点|课程
+
+
+
+
+1、PDA版移动护理的开发
+	1.1、新增病人详情页可扫描
+	1.2、提示文字变大，增加 核对成功 的提示
+	1.3、实现分类医嘱
+	1.4、添加主管床位病人
+1.5、重绘登录布局及相关主页面布局
+1.6、添加实体菜单
+	1.7、新增评估单功能
+1.8、适配新版白色PDA
+2、客服中心的开发
+3、OA的开发
+	3.1、添加资质管理功能
+	3.2、添加问卷调查功能
+	3.3、添加新文档共享功能
+	3.4、添加发送短信功能
+	3.5、维护人员档案
+4、开发危急值短信推送系统
+5、开发药品查询系统
+
+
+
+
+
+医护人员会议申请流程
+1，登录OA，左侧菜单项“综合行政”-“会议管理”-点击“会议申请”
+2，填写“名称”、“主题”、“描述”、“出席人员”、“开始时间和结束时间”并选择相关“会议室”
+3，点击“确定”，会议申请成功。
+
+
+	2017-07-04 07:39:37.000
+
+
+
+list.clear();
+						list_new=getsource();
+						list.addAll(list_new);
+						lvadapter.notifyDataSetChanged();
+						m_spiModel.setAdapter(adapter);//将adapter 添加到spinner中    
+
+
+工单统计
+6月份总计：3069，驳回：117，完成：2952
+7月份总计：3195，驳回：109，完成：3086
+8月份总计：3477，驳回：136，完成：3341
+9月份总计：2048，驳回：224，完成：1824
+10月份总计：1259，驳回：86，完成: 1173
+
+
+select * from sms_sent where DATE_FORMAT(requesttime,'%Y-%m-%d')='2017-11-15'
+
+
+2.208  评分录入地址  
+
+
+<EMPID>2659</EMPID>
+<EMPNAME>陈虹舟</EMPNAME>
+<Serialnumber>2017110612373756_1387</Serialnumber>
+<EmpMobileNum>11121212121</EmpMobileNum>
+
+
+
+
+select SUBSTR(DiagID,1,instr(DiagID,'.',1,1)-1),DiagDes,count(*) total from BEC01020 A
+inner join BEC01010 B on A.SerialNumber=B.SerialNumber
+ where A.DiagID!='-' and B.OrgID_DisDiag='010101030110' group by SUBSTR(DiagID,1,instr(DiagID,'.',1,1)-1),DiagDes order by total desc FETCH FIRST 10 ROWS ONLY ;
+ 
+select SUBSTR(DiagID,1,3) total from BEC01020  FETCH FIRST 10 ROWS ONLY ;
+select instr(DiagID,'.',1,2) total from BEC01020  FETCH FIRST 10 ROWS ONLY ;
+
+
+<div class="col-lg-7 col-md-12">
+                    <h1>注意事项 <br>
+                        <small>工单发放奖励以“完成”状态为准，如果问题已经处理完成，请报修人进行关闭工单或者更改为“已完成”，维保人员也可通知报修人进行关闭！</small>
+                    </h1>
+                    <p>1,尽量自己填写报修内容，报修详情请填写详细，尽量填写手机号码方便处理人直接联系你</p>
+                    <p>2,如果问题已经解决，请处理人及时告知相关报修人更改状态</p>
+                    <p><b>3,如果问题已经解决，填报人员请及时登录系统修改工单状态，更改为“已完成”</b></p>
+                </div>
+
+
+
+
+select A.DiagDes,count(A.DiagDes) total from BEC01020 A
+inner join BEC01010 B on A.SerialNumber=B.SerialNumber
+where  B.DisChargeDate>='2017-01-01 00:00:00' and B.DisChargeDate<='2017-06-30 23:59:59' 
+and A.DiagRoleID='20' and A.DiagTypeID='0204' group by A.DiagDes order by total desc 
+FETCH FIRST 10 ROWS ONLY ;
+
+select DiagRoleID,DiagTypeID from BEC01020 where DiagRoleID='20' and DiagTypeID='0204'
+
+
+select A.DiagDes,count(*) total from BEC01020 A
+inner join BEC01010 B on A.SerialNumber=B.SerialNumber
+where  B.AdmissionDate>='2017-01-01 00:00:00' and B.AdmissionDate<='2017-06-30 23:59:59' and instr(DiagID,'.',1,1)!=0 and A.DiagRoleID='0204' and A.DiagClassID='0' group by A.DiagDes order by total desc FETCH FIRST 10 ROWS ONLY ;
+
+select A.DiagDes,count(*) total from BEC01020 A
+inner join BEC01010 B on A.SerialNumber=B.SerialNumber
+ where  B.AdmissionDate>='2017-01-01 00:00:00' and B.AdmissionDate<='2017-06-30 23:59:59' and instr(DiagID,'.',1,1)!=0  group by A.DiagDes order by total desc FETCH FIRST 10 ROWS ONLY ;
+
+//十大手术排名
+select DiagName_Befor,count(*) total from BIW03010 where ReplyDate between '2017-01-01 00:00:00' and '2017-06-30 23:59:59' group by DiagName_Befor order by total desc FETCH FIRST 10 ROWS ONLY ;
+
+
+
+
+
+
+select UserId ,UserName,IDNumber,Department.DeptName,User_Priv.PrivName from Users
+inner join Department on Users.DeptId=Department.DeptId
+inner join User_Priv on Users.PrivId=User_Priv.PrivId
+
+select UserId,UserName,IDNumber from Users where UserId not in( '1820','SYS','WEB0001')
+
+select UserId,UserName,CardNo from Hrms
+
+
+
+1．人事管理
+建立人员信息档案，管理各类人员基本信息和变动信息，实现人员信息方便快捷的统计和查询，生成各类人员管理台帐。
+可自定义增加员工资料属性（如自定义字段、子集），完整记录员工的相关信息。
+● 可批量导入人员基本信息档案。
+● 通过身份证计算个人出生年月与年龄。
+● 支持批量数据更新。
+● 员工生日、试用期满、证照到期，合同到期、退休时间等自动提醒。
+● 支持人员变动操作，如入职、试用、延长试用，转正、调岗、薪资变动、离职，实现对员工从入职到离职的整个过程的信息化管理。
+● 支持员工自己填写提交离职申请表，人性化管理离职操作过程。
+● 支持员工离职程序在线流程化处理，自定义离职审查表。
+● 支持员工从离职档案库中复职。
+● 提供强大的定位查询及模糊查询功能，能快速方便查找任意的相关信息，实现以EXCEL表格格式导出相关信息功能。
+● 提供各类统计报表，如：人员档案的报表、人员结构分析报表、部门分类统计报表、月度人数统计报表、年度人数统计报表等。
+● 支持用户自由定制多种不同形式的统计报表。
+
+短信模板描述
+消化科 张三，正在2号3楼消化科医师办公室，请保卫科速派人来 
+5272718510003|消化科|李四|2|3|消化科
+
+
+select title 标题,details 详情,address 地址,name 联系人,dt_order.telephone 电话,username 提交人工号,dt_order.add_time 提交时间,dt_type_list.typeName 科室,dt_manager.real_name 处理人, dt_order.update_time 处理时间 from dt_order
+ left join dt_type_list on dt_order.type=dt_type_list.id
+ left join dt_manager on dt_manager.user_name=dt_order.update_name
+where dt_order.add_time between '2017-07-01 00:00:00' and '2017-07-31 23:59:59' and state='3' and username
+ in ('2006','1260','1089','1461','1073','1111','1082','1106','1159','1272','2002','1183','1241','1564','1115','1153','1069')
+ order by name desc
+
+
+
+
+//病人是否归档，护理记录单看不到出院病人
+select * from Biw01020 where inpatiid='00369496';
+select * from BIW01020 where SerialNumber='2017081208285577_1479';
+
+update BIW01020 set ArchivesFlag='0' where SerialNumber='2017081208285577_1479';
+
+
+select SUBSTR(DiagID,1,instr(DiagID,'.',1,1)-1),count(*) total,ROW_NUMBER() OVER() as ROW_NO from BEC01020 A
+inner join BEC01010 B on A.SerialNumber=B.SerialNumber
+ where B.OrgID_DisDiag='010101030110' and B.AdmissionDate>='2017-07-01 00:00:00' and B.AdmissionDate<='2017-07-26 23:59:59' and instr(DiagID,'.',1,1)!=0  group by SUBSTR(DiagID,1,instr(DiagID,'.',1,1)-1) order by total desc FETCH FIRST 10 ROWS ONLY ;
+
+
+
+select SUBSTR(DiagID,1,instr(DiagID,'.',1,1)-1),count(*) total,ROW_NUMBER() OVER() as ROW_NO from BEC01020 A
+inner join BEC01010 B on A.SerialNumber=B.SerialNumber
+ where B.OrgID_DisDiag='010101030110' and instr(DiagID,'.',1,1)!=0  group by SUBSTR(DiagID,1,instr(DiagID,'.',1,1)-1) order by total desc FETCH FIRST 10 ROWS ONLY ;
+
+
+select SUBSTR(DiagID,1,instr(DiagID,'.',1,1)-1),DiagDes,count(*) total from BEC01020 A
+inner join BEC01010 B on A.SerialNumber=B.SerialNumber
+ where A.DiagID!='-' and  B.OrgID_DisDiag='010101030110' and instr(DiagID,'.',1,1)!=0  group by SUBSTR(DiagID,1,instr(DiagID,'.',1,1)-1),DiagDes order by total desc FETCH FIRST 10 ROWS ONLY ;
+
+
+select Substring(ItemID,1,charindex('.',ItemID)-1) from test
+
+
+select DLNOffice.dbo.Users.UserName as 提交人,DLNOffice.dbo.Users.IDNumber as 身份证号,sum(case when dt_order.state = 0 then 1 else 0 end) as 待处理,sum(case when dt_order.state = 1 then 1 else 0 end) as 处理中,sum(case when dt_order.state = 2 then 1 else 0 end) as 驳回,sum(case when dt_order.state = 3 then 1 else 0 end) as 完成,count(dt_order.state) as total
+from dt_order  inner join DLNOffice.dbo.Users on dt_order.username=DLNOffice.dbo.Users.UserId 
+where dt_order.add_time between '2017-06-01 00:00:00' and '2017-06-30 23:59:59' 
+group by DLNOffice.dbo.Users.UserName,DLNOffice.dbo.Users.IDNumber order by total desc
+
+
+
+select SUBSTR(DiagID,1,instr(DiagID,'.',1,1)-1) total from BEC01020  FETCH FIRST 10 ROWS ONLY ;
+
+
+select SUBSTR(DiagID,1,3) diagid,count(DiagID) total from BEC01020 where (DiagID!='-') group by SUBSTR(DiagID,1,3) order by total desc;
+select SUBSTR(DiagID,1,3) diagid,DiagDes,count(*) total from BEC01020 where (DiagID!='-')  group by SUBSTR(DiagID,1,3),DiagDes order by total desc FETCH FIRST 10 ROWS ONLY ;
+select SUBSTR(DiagID,1,3),DiagDes,count(*) total from BEC01020 A
+inner join BEC01010 B on A.SerialNumber=B.SerialNumber
+ where A.DiagID!='-' and B.OrgID_DisDiag='010101030110' group by SUBSTR(DiagID,1,3),DiagDes order by total desc FETCH FIRST 10 ROWS ONLY ;
+
+
+select DLNOffice.dbo.Users.UserName as 提交人,sum(case when dt_order.state = 0 then 1 else 0 end) as 待处理,sum(case when dt_order.state = 1 then 1 else 0 end) as 处理中,sum(case when dt_order.state = 2 then 1 else 0 end) as 驳回,sum(case when dt_order.state = 3 then 1 else 0 end) as 完成,count(dt_order.state) as total 
+from dt_order
+inner join DLNOffice.dbo.Users on dt_order.username=DLNOffice.dbo.Users.UserId 
+where dt_order.add_time between '2017-06-01 00:00:00' and '2017-06-30 23:59:59' and
+DLNOffice.dbo.Users.UserName in (select A.Name from fanpin A where A.TypeName='临床成本' and Name in(select distinct DLNOffice.dbo.Users.UserName from dt_order 
+inner join DLNOffice.dbo.Users on dt_order.username=DLNOffice.dbo.Users.UserId 
+where dt_order.add_time between '2017-06-01 00:00:00' and '2017-06-30 23:59:59'))
+group by DLNOffice.dbo.Users.UserName order by total desc
+
+
+select A.Username 工号,A.Name 姓名,A.ID 身份证号,A.Bank 银行账户,A.Department 科室 from fanpin A where A.TypeName='临时' and Name in(select distinct DLNOffice.dbo.Users.UserName from dt_order 
+inner join DLNOffice.dbo.Users on dt_order.username=DLNOffice.dbo.Users.UserId 
+where dt_order.add_time between '2017-06-01 00:00:00' and '2017-06-30 23:59:59')
+
+
+select dt_manager.real_name as 处理人,sum(case when dt_order.state = 0 then 1 else 0 end) as 待处理,sum(case when dt_order.state = 1 then 1 else 0 end) as 处理中,sum(case when dt_order.state = 2 then 1 else 0 end) as 驳回,sum(case when dt_order.state = 3 then 1 else 0 end) as 完成,count(dt_order.state) as total 
+from dt_order  inner join dt_manager on dt_order.update_name=dt_manager.user_name
+where dt_order.add_time between '2017-06-01 00:00:00' and '2017-06-30 23:59:59'
+group by dt_manager.real_name order by total desc
+
+
+
+
+
+CREATE TABLE BEMR04015
+
+(
+ id [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+ score1 [int] ,
+ score2 [int] ,
+ score3 [int] ,
+ score4 [int] ,
+ score5 [int] ,
+ score6 [int] ,
+ score7 [int] ,
+ score8 [int] ,
+ total [int] ,
+ username [varchar] (50) ,
+ add_time [varchar] (50),
+ seriesnumber [varchar] (500),
+ typename [varchar] (500)
+
+)
+insert into BEMR04015 (score1,total,username,add_time) values(2,12,'8108','2017-07-07 15:59:59')
+
+
+
+
+
+
+
+select address as 提交人,sum(case when dt_order.state = 0 then 1 else 0 end) as 待处理,sum(case when dt_order.state = 1 then 1 else 0 end) as 处理中,sum(case when dt_order.state = 2 then 1 else 0 end) as 驳回,sum(case when dt_order.state = 3 then 1 else 0 end) as 完成,count(dt_order.state) as total 
+from dt_order  
+where dt_order.add_time between '2017-06-01 00:00:00' and '2017-06-30 23:59:59' and username in('2659','2660','2661')
+group by address order by total desc
+
+select name,details,address from dt_order where state='3' and add_time between '2017-06-01 00:00:00' and '2017-06-30 23:59:59' and username in('2659','2660','2661')  order by address 
+
+select * from dt_order where address in('82380','84124')
+
+
+
+
+
+
+
+select dt_manager.real_name as 处理人,sum(case when dt_order.state = 0 then 1 else 0 end) as 待处理,sum(case when dt_order.state = 1 then 1 else 0 end) as 处理中,sum(case when dt_order.state = 2 then 1 else 0 end) as 驳回,sum(case when dt_order.state = 3 then 1 else 0 end) as 完成,count(dt_order.state) as total 
+from dt_order  inner join dt_manager on dt_order.update_name=dt_manager.user_name
+where dt_order.add_time between '2017-06-01 00:00:00' and '2017-06-30 23:59:59'
+group by dt_manager.real_name order by total desc
+
+
+select DLNOffice.dbo.Users.UserName as 提交人,sum(case when dt_order.state = 0 then 1 else 0 end) as 待处理,sum(case when dt_order.state = 1 then 1 else 0 end) as 处理中,sum(case when dt_order.state = 2 then 1 else 0 end) as 驳回,sum(case when dt_order.state = 3 then 1 else 0 end) as 完成,count(dt_order.state) as total 
+from dt_order  inner join DLNOffice.dbo.Users on dt_order.username=DLNOffice.dbo.Users.UserId 
+where dt_order.add_time between '2017-06-01 00:00:00' and '2017-06-30 23:59:59'
+group by DLNOffice.dbo.Users.UserName order by total desc
+
+
+select B.ItemName,UseGuide,Effect from BHD04020 A inner join BHD04010 B on A.ItemID=B.ItemID  where A.ItemID = '010000000001' 
+select UseGuide,Effect from BHD04020 where ItemID like '%01'
+
+
+select * from dt_manager
+update dt_manager set group_id='55' where id='59'
+select * from dt_order where group_id like '05%' or username ='2584' or update_name ='2584' or deptID ='05'
+select title 标题,details 详情,address 地址,name 联系人,telephone 电话,username 提交人工号,add_time 提交时间,dt_type_list.typeName 科室 from dt_order left join dt_type_list on dt_order.type=dt_type_list.id where state='0'
+
+select COUNT(*) from WeChatUsers where CardID!=''
+
+select * from dt_order where deptID='400' and username in('2659','2660','2661');
+select  * from dt_order where id='419';
+update dt_order set state='1' where id='419';
+
+select id,title,details,address,name,telephone,username,add_time from dt_order where  state='1'
+select * from WeChatUsers where Openid='oF6dUwyBuqVjjaSl96xI-nBk91os'
+update WeChatUsers set CardID='', RoleType='1' where Openid='oF6dUwyBuqVjjaSl96xI-nBk91os'
+insert into dt_type_list(typeName,parentID,typeID,class_list,class_layer) values('保洁','18','0107',',18,65,','2')  
+<small>维保人员微信端操作流程：“抢单”→“处理完成”→工单变成“待确认”状态，及时联系报修人员在“待确认”中，更改工单成“完成”状态。</small>
+
+Install-Package EntityFramework -projectname Domain
+
+
+
+1038436972821    84392298   84392188
+
+
+网址：http://221.131.143.72:18080/wefun/index
+用户名：syxzyy 
+密码：syxzyy1!
+
+
+82990一区，中医一高
+
+沭阳县中医院集团客户短信平台用以开发的接口数据库信息：
+接口使用的数据库平台为  mysql
+用以接入做开发的数据库名称为：dbplugin
+数据库地址：211.139.123.136
+数据库登陆名：dbplugin
+数据库登陆密码：dbzhYf(132)!
+端口号：3507
+应用标识（APPLICATIONID）：APP128 
+具体开发请参考烽火MAS2.0数据库接口文档
+
+请开发人员在连接接口前，提供连接短信平台接口服务器的外网ip，用于添加ip3507端口的白名单使用。
+
+
+近期，冒充卫生计生部门以发放生育补贴为由要求操作银行卡的诈骗案件多发，请小心。请牢记：冒充公检法人员指令汇款到“安全账户”，通过QQ冒充领导、亲友要求汇款，发布含不明网址各类信息，告知领取购车购房、新生儿、残疾、丧葬补贴，提示中奖、办理贷款、低价售物、招聘兼职刷信誉、提升信用卡额度、网购异常、机票改签退款等手段实施诈骗，勿上当，请转发。
+
+
+拉勾网
+
+中间大药房账号1028，密码：147369
+
+
+
+[{name: '工单总数量', data: [['2017-03-23', 27], ['2017-03-24', 33], ['2017-03-25', 13], ['2017-03-26', 7], ['2017-03-27', 23], ['2017-03-28', 42], ['2017-03-29', 23], ['2017-03-30', 20], ]
+
+select * from dt_order where deptID='400' and username in('2659','2660','2661');
+select  * from dt_order where id='419';
+update dt_order set state='1' where id='419';
+
+
+
+1633  加急诊产科
+
+2017-03-14  充值吕玲和方思佳600元（包括1月份和2月份）
+
+
+
+
+刘园 ， 李良林 ，武博文，沈晶晶，纪卫芳，伍震    五官科 400
+徐严                神经内科二  400
+
+
+13228710217
+
+王小龙  领了鼠标   20170225
+
+
+
+ 新增 徐严  神经内科二  指纹,门诊  熊治川  疼痛科  王磊
+
+李玲玲充400 王一珠充600
+
+1311   2017-01-25 加急诊产科医生工作台
+
+
+//十九区护士工作站
+工号：2371   密码：88888
+
+key:gmZ6rfR+78th+N5/uRKmRR5xuXmkI75jumPXSeVhWV+L6J3z5HntyA==
+OrdID:20161031113321289000J_1289
+WSID:9C1200000B
+Serialnumber:2016103110534610_1589
+
+
+@android:style/Theme.NoTitleBar.Fullscreen
+c:\users\administrator\documents\visual studio 2012\Projects
+
+
+USE [DBBIF]
+GO
+
+SELECT [ApplyID]
+      ,[ApplyTypeID]
+      ,[PatiID]
+      ,[Serialnumber]
+      ,[Flag]
+      ,[OrgID]
+      ,[OrgName]
+      ,[ApplyDate]
+      ,[InContent]
+      ,[OutContent]
+      ,[StateID]
+      ,[FinishDate]
+      ,[PATIINFO]
+      ,[UPDATETIME]
+  FROM [dbo].[BIF01020] where [Serialnumber]='2016122209360115_1329'
+GO
+select * from Biw01020 where inpatiid='00387918'
+select * from BIF01020 where ApplyID='201611051021008880005'
+update BIF01020 set StateID='0' where ApplyID='201612221005349800026'
+
+
+select month(add_time) as 月份,sum(state) from dt_order group by month(add_time)s
+
+
+// TODO Auto-generated method stub
+						String _price=et_price.getText().toString();
+						//String _span= m_spiModel.getSelectedItem().toString();
+						if(_price.equals(""))
+						{
+							Toast.makeText(Index.this,"请输入价格",Toast.LENGTH_SHORT).show();
+						}
+						else
+						{
+							new DBUtil().addUser(et_price.getText().toString(),et_price.getText().toString(),m_spiModel.getSelectedItem().toString());
+							Toast.makeText(Index.this,"提交成功",Toast.LENGTH_SHORT).show();
+							tv_price.setText(db.selectPrice());
+							tv_people.setText(db.selectPeople());
+							tv_TotalPrice.setText(db.selectTotalPrice());
+							tv_TotalPeople.setText(db.selectTotalPeople());
+							et_price.setText("");
+							m_spiModel.setAdapter(adapter);//将adapter 添加到spinner中    
+							NotificationCompat.Builder builder=new NotificationCompat.Builder(Index.this);
+					    	builder.setSmallIcon(R.drawable.ic_launcher);
+					    	builder.setContentTitle("您有一条新消息");
+					    	builder.setContentText("数据更新成功！");
+					    	builder.setTicker("新消息");
+					    	builder.setDefaults(Notification.DEFAULT_ALL);
+					    	builder.setAutoCancel(true);
+					    	//Intent intent=new Intent(Index.this,Index.class);
+					    	Intent intent=new Intent(Intent.ACTION_MAIN);
+					    	intent.addCategory(Intent.CATEGORY_LAUNCHER);
+					    	intent.setComponent(new ComponentName(Index.this, Index.class));
+					    	intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+					    	
+					    	PendingIntent pi=PendingIntent.getActivity(Index.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+					    	builder.setContentIntent(pi);
+					    	//builder.setOngoing(true);//常驻通知
+					    	//创建一个对象通知
+					    	Notification n=builder.build();
+					    	//获取系统的通知管理器，然后发送通知
+					    	NotificationManager nm=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+					    	nm.notify(notifi_id,n);
+						}
+
+
+
+最近面试找工作对这方面都有切身的体会，由于以前工作的关系，对一些通用技术掌握并不深。但是一个问题是，公司招聘要招到完全符合要求的人，这明显是不现实的，就算是在技术上过关，那么进入新公司熟悉新公司的已有系统，以及各种各样的业务知识，也要花相当的时间，这个是免不掉的，其实可以在熟悉系统和业务的同时，补所需技术知识，这样可以一举两得。而看人不看重软实力，盯着具体的技术问，是无法问出来面试的人的真实情况的。现实的情况时，每个公司都有其业务，技术本质上是服务于业务的。问具体的技术，不少人和我一样很容易答不上来，这并不能说明别人差，技术只是一方面，个人理解更为重要的是逻辑分析能力，团队协作能力，沟通交流能力等看不见的软实力。技术欠缺，可以短时间内补上来(有基础的话)，达到工作的要求，但是软实力欠缺就不是短时间内能够补上来的。个人价值，不光体现在技术上，更应该体现在软实力上。
+
+
+
+
+
+
+
+select B.PatiName, B.SexName,B.BirthDate,B.IDCard ,B.NationalityName,B.PatiTeleNumber,D.TeleNum,E.TeleNum,B.CountryName,B.RegiLOCName,B.MarriedID,
+            A.AdmitDate,A.LeaveDate,A.InNo,F.OrgName OrgNameNuse,G.BedDes,H.EmpName,I.EmpName NurseEmp,J.OrgName OrgNameDoc
+             from BIW01020 A inner join BPI01010 B on A.PatiID=B.PatiID
+             left join BPI01020 D on A.PatiID=D.PatiID
+             left join BPI01030 E on A.PatiID=E.PatiID
+             LEFT JOIN BHD03010 F ON A.LocOrgID=F.OrgID
+             LEFT JOIN BHD03052 G ON A.BedID=G.BedID
+             LEFT JOIN BHD03030 H ON A.DoctorEmpID=H.EmpID
+             LEFT JOIN BHD03030 I ON A.NurseEmpID=I.EmpID
+             LEFT JOIN BHD03010 J ON A.DiagOrgID=J.OrgID
+             where InPatiID='00393272'
