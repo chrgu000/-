@@ -1,3 +1,43 @@
+发布文件：QryFunc
+更新内容：新增危机值查询统计
+发布人员：胡元元
+
+
+//string[] array = { "{\"hospital_id\":\"syzyyadmin\",\"hospital_area_id\":\"\",\"auth_code\":\"134727187749422289\",\"order_amount\":\"0.01\",\"biz_id\":\"4a995119c725431285c04d647109d05f\",\"pay_type\":\"wechatScan\",\"data_src\":\"hisSrc\",\"cashier_id\":\"1000001（张三）\",\"sign\":\"0CE2D13B3A065263E01BB6EEA278CF5D\"}" };
+        //Label1.Text = DynamicInvocationWebService(url, "microPay", array);
+
+
+{"hospital_id":"syzyyadmin","hospital_area_id":"","auth_code":"134727187749422289","order_amount":"0.01","biz_id":"4a995119c725431285c04d647109d05f","pay_type":"wechatScan","data_src":"hisSrc","cashier_id":"1000001（张三）","sign":"23422A43BAEB5163DFA2A26698C68ED6"}
+
+23422A43BAEB5163DFA2A26698C68ED6
+
+
+auth_code=134727187749422289&biz_id=4a995119c725431285c04d647109d05f&cashier_id=1000001（张三）&data_src=hisSrc&hospital_id=syzyyadmin&order_amount=0.01&pay_type=wechatScan&key=92278c4d91304ca383a9e4c9dfe80b44
+
+
+
+http://web.witontek.com/eHospital2/services/windowPayService
+http://ehospital.witontek.com/eHospital2/services/miniPayService
+
+microPay
+
+
+http://web.witontek.com/eHospital2/services/windowPayService?hospital_id=syzyyadmin&auth_code=134727187749422289&order_amount=0.01&biz_id=4a995119c725431285c04d647109d05f&pay_type=wechatScan&data_src=hisSrc&cashier_id%20=1000001%EF%BC%88%E5%BC%A0%E4%B8%89%EF%BC%89&sign=0CE2D13B3A065263E01BB6EEA278CF5D
+
+http://web.witontek.com/eHospital2/services/windowPayService
+{hospital_id=syzyyadmin&hospital_area_id=&auth_code=134727187749422289&order_amount=0.01&biz_id=4a995119c725431285c04d647109d05f&pay_type=wechatScan&data_src=hisSrc&cashier_id =1000001（张三）&sign=0CE2D13B3A065263E01BB6EEA278CF5D}
+
+
+http://web.witontek.com/eHospital2/services/windowPayService?hospital_id=syzyyadmin&auth_code=134727187749422289&order_amount=0.01&biz_id=4a995119c725431285c04d647109d05f&pay_type=wechatScan&data_src=hisSrc&sign=0CE2D13B3A065263E01BB6EEA278CF5D
+http://server:port/eHospital2/window/microPay?hospital_id=jnyxyfsyyyzyqadmin&auth_code=134727187749422289&order_amount=0.01&biz_id=4a995119c725431285c04d647109d05f&pay_type=wechatScan&data_src=hisSrc&sign=0CE2D13B3A065263E01BB6EEA278CF5D
+ffmpeg\bin
+
+ffmpeg.exe -threads 4 -i g:/1.mp4 -ab 32 -ar 22050 -vcodec libx264 -qscale 6 -r 25 -s 716x374 -flags +loop -crf 24 -bt 256k -vol 200 -vf yadif g:/11.mp4
+
+
+
+
+
 
 发布文件：BIW
 更新内容：新增产程进展图，调整体温单疼痛评估显示问题
