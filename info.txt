@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 1,订单不存在的情况
 {"message":"操作成功","result":"SUCCESS","data":{"code_message":"订单不存在","code":"ORDER_NOT_EXIST"}}
 2，订单存在的情况
@@ -89,6 +90,15 @@ Sign 		string
 
 
 
+=======
+select * from Bright.biw03061;
+select * from Bright.biw03060;
+select substr(char(inspectiontime),1,10) from Bright.biw03061 ;
+select substr(char(inspectiontime),1,16) RetID from Bright.biw03061 where substr(char(inspectiontime),1,10)='2018-02-01' ;
+select * from Bright.BIW03030;
+select * from Bright.biw03061 where serialnumber='2018012716545443_1359' and  inspectiontime='2018-01-31 12:00:00';
+select * from Bright.BHD01010 where CodeTypeID='010033' and leaf='1';
+>>>>>>> 1d7bc16b2061ca6bfce6eae077017c98425c7394
 
 
 
