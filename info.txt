@@ -1,3 +1,12 @@
+1,订单不存在的情况
+{"message":"操作成功","result":"SUCCESS","data":{"code_message":"订单不存在","code":"ORDER_NOT_EXIST"}}
+2，订单存在的情况
+{"message":"操作成功","result":"SUCCESS","data":{"sign":"9D564952F4876B4A0917F13FEA323C72","trade_no":"EH201803010000000952","wt_trade_no":"20180301010000000000000000398649","total_fee":1,"time_end":"20180301083609","code_message":"成功","code":"SUCCESS","channel":"wechat"}}
+
+
+
+
+
 发布文件：QryFunc
 更新内容：新增危机值查询统计
 发布人员：胡元元
