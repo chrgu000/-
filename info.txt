@@ -1,4 +1,22 @@
-<<<<<<< HEAD
+
+ <!-- <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/> 
+     <uses-permission android:name="android.permission.WRITE_SETTINGS" /> -->
+
+
+select count(1) from sms_inbox where extcode='01' and sourceaddr='13951190130' and '2018-03-01 17:23:55'<=receivetime<='2018-03-01 17:28:55';
+select requesttime from sms_sent order by requesttime DESC limit 1  ;
+
+select * from sms_inbox where extcode='01' and sourceaddr='15261277153' and receivetime between '2018-03-06 08:29:12' and '2018-03-06 08:34:12' ;
+
+
+
+select count(1) from sms_inbox where extcode='01' and sourceaddr='15261277153' and '2018-03-06 08:29:12'<=receivetime<='2018-03-06 08:34:12' 
+
+select * from BIF01022 where EmpMobileNum='15261277153' and Item_name='钾' and Current_result='2.29' and Patient_id='0012285632' and state=0 
+
+
+
+HeartWJZ
 1,订单不存在的情况
 {"message":"操作成功","result":"SUCCESS","data":{"code_message":"订单不存在","code":"ORDER_NOT_EXIST"}}
 2，订单存在的情况
