@@ -1,3 +1,125 @@
+危急值2.109 BIF01021
+192.168.2.208 EMR  手麻接口(PDF文件、助手)
+
+
+
+D:\用户目录\我的文档\visual studio 2015\Projects\WindowsFormsApplication1\WindowsFormsApplication1
+
+窗体测试图片demo
+
+
+
+
+
+
+
+江苏银行卡号：6228761205003098022
+身份证号码：321322199109084078
+持卡人：胡元元
+
+
+
+
+
+gmZ6rfR+78th+N5/uRKmRR5xuXmkI75jumPXSeVhWV+L6J3z5HntyA==
+2018031410395346_1467
+S.414316;010705
+S.41431600;01
+
+
+
+
+
+DateTime beginTime = Convert.ToDateTime(bll.getSentSms());
+                                        DateTime endTime = beginTime.AddMinutes(5);
+                                        bool s1 = bll.ExistMinute(phone, beginTime.ToString("yyyy-MM-dd HH:mm:ss"), endTime.ToString("yyyy-MM-dd HH:mm:ss"));
+                                        bool hasValue = bll2.Exists(phone, Item, score, patient_id, 0);
+                                        if (s1 == true)//五分钟之内
+                                        {
+                                            if (hasValue)//存在
+                                            {
+                                                Model.BIF01022 model = new Model.BIF01022();
+                                                model.Patient_id = patient_id;
+                                                model.Item_name = Item;
+                                                model.Current_result = score;
+                                                model.EmpMobileNum = phone;
+                                                model.State = 1;
+                                                bll2.Update(model);
+                                            }
+                                            else
+                                            {
+                                                Model.Sms_outbox model = new Model.Sms_outbox();
+                                                model.sismsid = id;
+                                                model.extcode = "01";
+                                                model.destaddr = phone;
+                                                model.messagecontent = messageID + "|" + doctor + "|" + patient + "|" + Item + "|" + score + "|" + limit;
+                                                model.reqdeliveryreport = 1;
+                                                model.msgfmt = 15;
+                                                model.sendmethod = 2;
+                                                model.requesttime = _add_time;
+                                                model.applicationid = "APP128";
+                                                if (bll.Add(model))
+                                                {
+                                                    Model.BIF01022 model2 = new Model.BIF01022();
+                                                    model2.Patient_id = patient_id;
+                                                    model2.Patient_name = patient;
+                                                    model2.Item_name = Item;
+                                                    model2.Current_result = score;
+                                                    model2.EmpMobileNum = phone;
+                                                    model2.EMPNAME = doctor;
+                                                    model2.State = 0;
+                                                    model2.Add_time = _add_time;
+                                                    bll2.Add(model2);
+                                                    return ++i;
+                                                }
+
+                                            }
+                                        }
+                                        else
+                                        {
+                                            
+                                            if (!bll2.Exists(phone, Item, score, patient_id, 1))//不存在或者状态为0 发送
+                                            {
+                                                Model.Sms_outbox model = new Model.Sms_outbox();
+                                                model.sismsid = id;
+                                                model.extcode = "01";
+                                                model.destaddr = phone;
+                                                model.messagecontent = messageID + "|" + doctor + "|" + patient + "|" + Item + "|" + score + "|" + limit;
+                                                model.reqdeliveryreport = 1;
+                                                model.msgfmt = 15;
+                                                model.sendmethod = 2;
+                                                model.requesttime = _add_time;
+                                                model.applicationid = "APP128";
+                                                if (bll.Add(model))
+                                                {
+                                                    Model.BIF01022 model2 = new Model.BIF01022();
+                                                    model2.Patient_id = patient_id;
+                                                    model2.Patient_name = patient;
+                                                    model2.Item_name = Item;
+                                                    model2.Current_result = score;
+                                                    model2.EmpMobileNum = phone;
+                                                    model2.EMPNAME = doctor;
+                                                    model2.State = 0;
+                                                    model2.Add_time = _add_time;
+                                                    bll2.Add(model2);
+                                                    return ++i;
+                                                }
+                                                
+                                            }
+
+                                        }
+
+
+
+
+
+
+
+1,设置-电池-关闭待机智能省电
+2，关闭旋转
+3，移动护理安装成功以后，按住不放拖到主页面
+4,收藏下载网址
+
 
  <!-- <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/> 
      <uses-permission android:name="android.permission.WRITE_SETTINGS" /> -->
