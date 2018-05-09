@@ -1,10 +1,37 @@
 发布文件：DLNWebservice
+更新内容：新增微信支付宝退款接口
+发布人员：胡元元
+
+
+发布文件：DLNWebservice
+更新内容：修改若干接口，新增一个实体类BIF01024，到时候包括以下在项目中
+发布人员：胡元元
+
+发布文件：DLNWebservice
+更新内容：修改给药接口
+发布人员：胡元元
+
+发布文件：DLNWebservice
 更新内容：新增门诊给药接口
 发布人员：胡元元
 
 发布文件：BIF
 更新内容：血糖值新增时段
 发布人员：胡元元
+
+select * from BIF01024 where empID='2371' order by measure_time desc
+select * from BIF01024 where checkID is not null order by measure_time desc
+select * from BIF01024 where type='住院输液条码' order by measure_time desc
+select * from BIF01024 where type='口服药条码' order by measure_time desc
+select * from BIF01024 where type='门诊输液条码' order by measure_time desc
+select * from BIF01024 where type='中药条码更新' order by measure_time desc
+select * from BIF01024 where type='饭盒记账' order by measure_time desc
+
+--PDA开发模式
+select * from BIF01024 where type='admin' order by measure_time desc
+
+--微信支付宝记账
+select * from BIF01024 where empID='Admin' order by measure_time desc
 
 
 5272718510003|消化科消化科消化科-56|张三|1|3|消化科医生
