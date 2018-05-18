@@ -1,3 +1,17 @@
+项目药品属性表BHD04020新增字段
+ItemDrugType1  int  ,ItemDrugType2  int,...ItemDrugType10  int
+
+
+发布文件：QryFunc
+更新内容：lis危急值统计
+模板路径：template/qry/危急值LIS.xml
+发布人员：胡元元
+
+
+发布文件：BurdenPort,BIF，DLNWebservice
+更新内容：新增窗体及方法
+发布人员：胡元元
+
 发布文件：DLNWebservice
 更新内容：新增微信支付宝退款接口
 发布人员：胡元元
@@ -18,6 +32,9 @@
 发布文件：BIF
 更新内容：血糖值新增时段
 发布人员：胡元元
+
+//微信更新付款方式
+update Bright.BOW04051 set PayModeID='0103' and PayModeNo='EH201805110000392505' where SettleID= '2018051117100237300_1689'
 
 select * from BIF01024 where empID='2371' order by measure_time desc
 select * from BIF01024 where checkID is not null order by measure_time desc
