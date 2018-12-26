@@ -1,0 +1,50 @@
+中医院随访系统    D:\vs\Suifang
+
+中医院客服系统    D:\vs\OldService\charisma-master
+
+妇幼客服系统      D:\vs\ShuYangFuYou
+
+定时框架          D:\WindowsFormsApplication1
+
+中医院推送危急值  D:\vs\WindowsFormsApplication1
+
+上传PDFDemo       D:\用户目录\我的文档\Visual Studio 2015\Projects\WindowsFormsApplication1
+
+沭阳中医院新做官网 D:\vs\ShuYang
+
+移动护理webservice服务 D:\vs\Mobile移动护理webservice服务
+
+相册路径  D:\用户目录\我的文档\Tencent Files\272958293\FileRecv\MobileFile\WifiPhoto
+
+定时框架toshelf  F:\BaiduNetdiskDownload\Chapter08
+
+小角色文件路径：服务器
+
+-----------------------------
+githup 目录    
+D:\MyInfo
+D:\Administrator\workspace5       移动护理
+D:\vs\WindowsFormsApplication1    危急值推送
+D:\vs\OldService\charisma-master  中医院客服系统
+
+-----------------------------------------
+
+2.24 力软框架地址
+2.96 影像
+2.210 温湿度
+
+CT,CTD,MR等图像为序列图像的，查询series表：
+
+（1）Series表volume值为local的，路径为：modality表里的ImagePath字段+series表里的ImagePath字段；
+（2）Series表volume值不为local的，路径为：\\192.168.2.97\imagesave+volume+ImagePath;
+
+
+
+DR，RF,DSA等图像不是序列图像的，查询image表：
+
+（1）image表volume值为local的，路径为：modality表里的ImagePath字段+series表里的localpath字段；
+（2）image表volume值不为local的，路径为：\\192.168.2.97\imagesave+volume+localpath;
+
+
+
+

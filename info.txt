@@ -1,6 +1,247 @@
+
+
+发布文件：BurdenPort,Biw
+更新内容：修复获取微信订单号，小几率出现的bug
+发布人员：胡元元
+
+发布文件：DLNWebservice   2.103
+更新内容：门诊不是首次给药添加 NA
+发布人员：胡元元
+
+发布文件：BIW
+更新内容：修复微信交纳押金bug
+发布人员：胡元元
+
+
+发布文件：BIW
+更新内容：住院，新增微信支付验证重复订单号
+发布人员：胡元元
+
+
+发布文件：BIW
+更新内容：入院登记新增微信支付，信用卡方式改为退现金
+发布人员：胡元元
+
+
+发布文件：BIF
+更新内容：优化微信查询功能
+发布人员：胡元元
+
+发布文件：OA
+更新内容：调整手卫生统计
+路径：替换office.dll
+发布人员：胡元元
+
+发布文件：BurdenPort,Biw
+更新内容：限制微信订单号长度
+发布人员：胡元元
+
+发布文件：OA
+更新内容：调整医师授权
+路径：替换office.dll
+发布人员：胡元元
+
+
+
+发布文件：DLNWebservice   2.103
+更新内容：优化临时医嘱执行签字接口
+发布人员：胡元元
+
+
+发布文件：BIF,BIW
+更新内容：医师工作台新增查看急诊病人血糖值
+发布人员：胡元元
+
+
+发布文件：OA
+更新内容：文件可修改上传时间
+路径：替换general/newdisk/list_edit.aspx
+      替换office.dll
+发布人员：胡元元
+
+
+发布文件：OA
+更新内容：新增删除视频学习记录
+路径：替换general/movie/edit.aspx
+      替换office.dll+dal.dll
+发布人员：胡元元
+
+
+阿里云：....:
+huanghongliang@gmail.com
+
+....:
+Dln123
+
+
+select * from sms_sent where requesttime > '2018-09-19' and sentresult=0 order by requesttime desc
+
+
+select * from sms_sent where requesttime > '2018-09-21' and destaddr='15150518111' and sentresult=0 order by requesttime desc
+
+
+发布文件：DLNWebservice_public 11.5服务
+更新内容：新增微信撤销接口日志
+发布人员：胡元元
+
+发布文件：DLNWebservice   2.103
+更新内容：针对门诊无给药录，预计执行时间更改为医嘱开立时间
+发布人员：胡元元
+
+沭阳县妇幼保健所
+沭阳县沭城街道苏州东路15号
+谷玉军
+备案服务号：f59ad2b6-2283-4617-8308-9e3ff92cbd37
+
+12321322469674336P
+
+黄工密码换成hlokm!@#
+
+
+发布文件：DLNWebservice_public 11.5服务
+更新内容：修复lis危急值bug
+发布人员：胡元元
+
+发布文件：DLNWebservice
+更新内容：修改补药清单方法和修改门诊给药方法
+发布人员：胡元元
+
+update bright.BIW06050  set PayModeID='0000' 
+ where PayID='2018082709393916700_1653';
+
+select * from bright.BIW06050 where  PayID='2018082709393916700_1653';
+
+发布文件：EMR
+更新内容：新增门诊护工签名
+发布人员：胡元元
+
+发布文件：DLNWebservice
+更新内容：修改心电图上传问题
+发布人员：胡元元
+
+
+发布文件：BIW
+更新内容：新增婴儿体温单录入呼吸
+模板路径：template/tran/mms/婴儿三测单_录入
+发布人员：胡元元
+
+
+
+{"message":"操作成功","result":"SUCCESS","data":{"sign":"DC9786C447986710134B3C11EF409B7B","re_call":"N","trade_no":"EH051807290000886307","code_message":"成功","code":"SUCCESS"}}
+
+3059	★★★伦理电影★★★【姐姐的守护者】	upload/movie/姐姐1.rmvb	在职员工	2018-07-27 20:30:00.000	NULL	NULL	NULL		0	,3059,	1
+
+发布文件：OA
+更新内容：院感科统计新要求
+发布内容：office.dll
+发布人员：胡元元
+
+发布文件：OA
+更新内容：应人力资源、院感科要求，新增视频统计和感染统计
+路径：general/votes/total和general/movie/total文件夹，
+      要包括在项目中，拷贝整个文件夹+office.dll+dal.dll
+发布人员：胡元元
+
 发布文件：QryFunc
-更新内容：添加十五分钟内处置率
-模板路径：template/qry/危急值统计.xml
+更新内容：应检验科要求，新增血糖统计
+模板路径：template/qry/血糖统计.xml
+发布人员：胡元元
+
+
+发布文件：DLNWebservice
+更新内容：修改给药方法
+发布人员：胡元元
+发布时间：现在
+
+发布文件：BHD
+更新内容：修改项目属性维护
+发布人员：胡元元
+
+发布文件：BOW
+更新内容：新增门诊体温单
+发布人员：胡元元
+
+
+发布文件：DLNWebservice
+更新内容：新增供应室灭菌锅相应方法
+发布人员：胡元元
+
+
+update TB_REPORTLIMIT set ReceiveTime=CONVERT(varchar, confirmdate, 120 )
+ where '2018-03-01 00:00:00'<=test_date and test_date<='2018-06-26 00:00:00' and confirmdate is not null
+
+发布文件：DLNWebservice
+更新内容：优化部分方法
+发布人员：胡元元
+
+
+打印机：67725 李83405
+黄亮：66111
+张家明：60258
+朱凯文：65888
+张浩东：62056
+吴天经：65545
+葛攀成：62092
+
+沭阳南关医院	二级丙等	沭城镇上海南路20号
+沭阳仁慈医院	二级乙等	人民西路东首50米
+沭阳县人民医院	三级丙等	沭城人民中路48号
+沭阳县协和医院	二级丙等	沭城镇
+沭阳县中心医院	二级丙等	学府南路1号
+沭阳县中医院	三级乙等	沭阳县沭城镇上海中路28号
+沭阳中山医院	一级丙等	上海南路2号
+
+public static Bitmap GetThumbnail(Bitmap bmp, int width, int height)
+        {
+            if (width == 0)
+            {
+                width = height * bmp.Width / bmp.Height;
+            }
+            if (height == 0)
+            {
+                height = width * bmp.Height / bmp.Width;
+            }
+
+            Image imgSource = bmp;
+            Bitmap outBmp = new Bitmap(width, height);
+            Graphics g = Graphics.FromImage(outBmp);
+            g.Clear(Color.Transparent);
+            // 设置画布的描绘质量   
+            g.CompositingQuality = CompositingQuality.HighQuality;
+            g.SmoothingMode = SmoothingMode.HighQuality;
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.DrawImage(imgSource, new Rectangle(0, 0, width, height + 1), 0, 0, imgSource.Width, imgSource.Height, GraphicsUnit.Pixel);
+            g.Dispose();
+            imgSource.Dispose();
+            bmp.Dispose();
+            return outBmp;
+        }
+
+发布文件：DLNWebservice
+更新内容：调整相关接口
+发布人员：胡元元
+
+Parcelable[] data= intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+		if(data!=null){
+			
+			NdefMessage[] ndefMessages=new NdefMessage[data.length];
+			for(int i=0;i<ndefMessages.length;i++){
+				ndefMessages[i]=(NdefMessage) data[i];
+				NdefRecord[] records=ndefMessages[i].getRecords();
+				String s=new String(records[0].getPayload());
+				tv.setText(s);
+			}
+			
+		}
+
+
+发布文件：QryFunc
+更新内容：lis危急值显示处置方式
+发布人员：胡元元
+
+发布文件：QryFunc
+更新内容：新增短信回复时间
+模板路径：template/qry/危急值LIS.xml
 发布人员：胡元元
 
 
@@ -189,19 +430,23 @@ if (hasValue&&!String.IsNullOrEmpty(report_phone))//状态为0 发送给报告医生
 项目药品属性表BHD04020新增字段
 ItemDrugType1  int  ,ItemDrugType2  int,...ItemDrugType10  int
 
+发布文件：BIF
+更新内容：处理危急值添加相应提示
+发布人员：胡元元
+
 发布文件：OA
 更新内容：手卫生调整
 路径：general/votes 要包括在项目中，拷贝整个文件夹+office.dll
 发布人员：胡元元
 
-
-发布文件：DLNWebservice
-更新内容：修改相关接口
+发布文件：OA
+更新内容：感染登记调整
+路径：general/votes/inspect 拷贝inspcet文件夹+office.dll
 发布人员：胡元元
 
 发布文件：QryFunc
-更新内容：lis危急值统计
-模板路径：template/qry/危急值LIS.xml
+更新内容：新增危急值短信回复统计
+模板路径：template/qry/危急值统计.xml
 发布人员：胡元元
 
 
@@ -218,8 +463,8 @@ ItemDrugType1  int  ,ItemDrugType2  int,...ItemDrugType10  int
 更新内容：修改若干接口，新增一个实体类BIF01024，到时候包括以下在项目中
 发布人员：胡元元
 
-发布文件：DLNWebservice
-更新内容：修改给药接口
+发布文件：DLNWebservice、OA
+更新内容：修改相应需求
 发布人员：胡元元
 
 发布文件：DLNWebservice
