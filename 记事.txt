@@ -45,6 +45,10 @@ DR，RF,DSA等图像不是序列图像的，查询image表：
 （1）image表volume值为local的，路径为：modality表里的ImagePath字段+series表里的localpath字段；
 （2）image表volume值不为local的，路径为：\\192.168.2.97\imagesave+volume+localpath;
 
+门诊正扫
+http://ehospital.witontek.com/other/redirect/clinic-pay.html?hospital_id=syzyyadmin&channel=0&real_name=%E5%BC%A0%E6%AD%A3%E9%98%B3&patient_card=0011689875
 
+住院正扫
+http://ehospital.witontek.com/other/redirect/clinic-pay.html?hospital_id=syzyyadmin&channel=1&id_card=320823194808103012&real_name=%E5%BC%A0%E6%AD%A3%E9%98%B3&serial_number=00457691
 
 
