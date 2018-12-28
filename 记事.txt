@@ -26,7 +26,8 @@ D:\MyInfo
 D:\Administrator\workspace5       移动护理
 D:\vs\WindowsFormsApplication1    危急值推送
 D:\vs\OldService\charisma-master  中医院客服系统
-
+D:\vs\Suifang                     中医院随访系统   
+D:\Administrator\workspace4	  小角色
 -----------------------------------------
 
 2.24 力软框架地址
