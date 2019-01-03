@@ -20,6 +20,8 @@
 
 小角色文件路径：服务器
 
+VS 模板路径：C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\ItemTemplatesCache\CSharp\Code\2052\Class
+
 -----------------------------
 githup 目录    
 D:\MyInfo
@@ -34,17 +36,6 @@ D:\Administrator\workspace4	  小角色
 2.96 影像
 2.210 温湿度
 
-CT,CTD,MR等图像为序列图像的，查询series表：
-
-（1）Series表volume值为local的，路径为：modality表里的ImagePath字段+series表里的ImagePath字段；
-（2）Series表volume值不为local的，路径为：\\192.168.2.97\imagesave+volume+ImagePath;
-
-
-
-DR，RF,DSA等图像不是序列图像的，查询image表：
-
-（1）image表volume值为local的，路径为：modality表里的ImagePath字段+series表里的localpath字段；
-（2）image表volume值不为local的，路径为：\\192.168.2.97\imagesave+volume+localpath;
 
 门诊正扫
 http://ehospital.witontek.com/other/redirect/clinic-pay.html?hospital_id=syzyyadmin&channel=0&real_name=%E5%BC%A0%E6%AD%A3%E9%98%B3&patient_card=0011689875
