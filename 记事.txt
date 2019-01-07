@@ -18,10 +18,13 @@
 
 定时框架toshelf  F:\BaiduNetdiskDownload\Chapter08
 
-小角色文件路径：服务器
+小角色文件路径：服务器192.168.11.5:9003
 
 VS 模板路径：C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\ItemTemplatesCache\CSharp\Code\2052\Class
 
+dll反壳工具   F:\de4dot
+dll反编译工具 F:\Reflector
+vs2010发布工具F:\vs2010发布工具
 -----------------------------
 githup 目录    
 D:\MyInfo
