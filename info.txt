@@ -1,5 +1,5 @@
 发布文件：DLNWebservice   2.103
-更新内容：新增路径地址
+更新内容：新增获取pacs信息字段
 发布人员：胡元元
 
 发布文件：BurdenPort,Biw

@@ -1,0 +1,110 @@
+患者基本信息数据表结构-表名：PersonalInformation
+
+select A.patiid,B.cardid, A.patiname,A.birthdate,A.patitelenumber,CountryID,CountryName,NativePlaceID,NativePlaceName,NationalityID,NationalityName,RegiLocID,RegiLOCName,RegiLocPostCode,MarriedID
+ from BPI01010 A left join BPI01050 B on A.patiid=B.patiid 
+ where B.date_begin>'2019-01-01'
+
+门诊/急诊挂号数据表结构-表名：RegisterRecord
+
+select A.SerialNumber,CardID,B.patiname,B.sexID,B.birthdate,HospID,DiagOrgID,D.orgname,RsrcTypeID,E.empname,E.idcard,VisitDate1,
+DateTypeID,F.codename,VisitUseMode,G.settleAmount from BOW01010 A
+ left join  BPI01010 B on A.patiid=B.patiid
+left join BHD03010 D on D.orgid=A.diagorgid
+left join BHD03030 E on A.DoctorEmpID=E.empid
+left join BHD01010 F on A.DateTypeID=F.codeid
+left JOIN BOW01020 G on A.SerialNumber=G.SerialNumber
+ where RegDate>='2019-01-09' 
+
+门诊/急诊就诊记录表结构-表名：MedicalRecord
+先关联BEMR04011,再取04011里的SERIALNUMBER,再关联BOW01010
+
+门诊/急诊/住院西药处方表结构（主表）表名：WM_Prescriptions
+select  ordid,D.cardid,B.patiname,B.sexID,B.birthdate,'1' as OP_EM_HP_MARK,E.settleamount,HospID,F.orgname,G.empname,G.idcard,orddate,OrdStatusID_Bill,OrdStatusID_Exec,PcsrptTypeID,TimesQuantity
+from BOW02010 A left join  BPI01010 B on A.patiid=B.patiid
+left join BPI02010 D on A.patiid=D.patiid
+left join BOW04050 E on A.SerialNumber=E.SerialNumber
+left join BHD03010 F on A.OrgID_Diag=F.orgid
+left join BHD03030 G on A.EmpID_Doct=G.empid
+where OrdDate>='2019-01-09' 
+
+select  ordid,D.cardid,B.patiname,B.sexID,B.birthdate,'3' as OP_EM_HP_MARK,'' as settleamount,'0101' as HospID,F.orgname,G.empname,G.idcard,InputDate
+from BIW02010 A left join  BPI01010 B on A.patiid=B.patiid
+left join BPI02010 D on A.patiid=D.patiid
+left join BHD03010 F on A.OrgID_Diag=F.orgid
+left join BHD03030 G on A.EmpID_Doct=G.empid
+where InputDate>='2019-01-09' 
+
+门诊/急诊/住院西药处方表结构（从表）表名：WM_PrescriptionDetails
+select A.ordid,D.cardid,'1' as OP_EM_HP_MARK,B.itemid,E.itemname,G.EntName,E.itemspec,B.DosageQuantity,B.DosageUnit,B.FreqID,B.price,UnitQuantity,UnitName,TotAmount,I.orgid,I.orgname,H.empname,H.idcard,orddate,PcsrptTypeID,TimesQuantity from BOW02010 A
+left join BPI02010 D on A.patiid=D.patiid
+left join BOW02011 B on A.ordid=B.ordid
+left join BHD04010 E on B.itemid=E.itemid
+left join BHD04012 F on E.itemid=F.itemid
+left join BHD09010 G on F.EntID_Factory=G.EntID
+left join BHD03030 H on A.EmpID_Doct=H.empid
+left join BHD03010 I on A.OrgID_Diag=I.orgid
+where OrdDate>='2019-01-10' 
+
+select A.ordid,D.cardid,'3' as OP_EM_HP_MARK,B.itemid,E.itemname,G.EntName,E.itemspec,B.DosageQuantity,B.DosageUnit,'',B.price,UnitQuantity,UnitName,'',I.orgid,I.orgname,H.empname,H.idcard,B.InputDate,'',TimesQuantity from BIW02010 A
+left join BPI02010 D on A.patiid=D.patiid
+left join BIW02011 B on A.ordid=B.ordid
+left join BHD04010 E on B.itemid=E.itemid
+left join BHD04012 F on E.itemid=F.itemid
+left join BHD09010 G on F.EntID_Factory=G.EntID
+left join BHD03030 H on A.EmpID_Doct=H.empid
+left join BHD03010 I on A.OrgID_Diag=I.orgid
+where B.InputDate>='2019-01-10' 
+
+
+
+
+
+select * from BOW01010 where RegDate>='2018-12-25' 
+
+select * from BOW01022 where SettleDate>='2018-12-25' 
+
+ select TYpeid,SettleDate,PayAmount,PayMODEID,PATINAME,PayModeNo 
+                              FROM ( 
+                              select  '挂号' TYpeid ,BOW01020.SettleDate,BOW01022.PayAmount,PayMODEID,BPI01010.PATINAME,PayModeNo
+                             from BOW01022
+                             INNER JOIN BOW01020 ON BOW01022.SETTLEID = BOW01020.SettleID
+                             INNER JOIN BOW01010 ON BOW01010.SERIALNUMBER = BOW01020.SERIALNUMBER
+                             INNER JOIN BPI01010 ON BPI01010.PatiID= BOW01010.PatiID
+                             WHERE BOW01020.SettleDate >= '2018-12-25 00:00:00' AND BOW01020.SettleDate < '2018-12-25 23:59:59' 
+                              
+                             UNION ALL
+                             select  '收费'  TYpeid ,BOW04051.SettleDate,PayAMOUNT , PayMODEID,BPI01010.PatiNAME,PayModeNo
+                             from BOW04051  
+                             INNER JOIN BOW04050 ON BOW04050.SETTLEID = BOW04051.SETTLEID
+                             INNER JOIN BPI01010 ON BPI01010.PatiID = BOW04050.patiID
+                             where BOW04051.SettleDate >= '2018-12-25 00:00:00' AND   BOW04051.SettleDate < '2018-12-25 23:59:59' 
+                             UNION ALL
+                             select  '押金'  TYpeid ,PayDate SettleDate,BIW06050.PayAmount,BIW06050.PayModeID,BPI01010.PatiName,PayModeNo
+                             from BIW06050
+                             INNER JOIN BIW06010 ON BIW06010.PayID = BIW06050.PayID
+                             INNER JOIN BPI01010 ON BPI01010.PatiID= BIW06010.PatiID
+                             WHERE  PayDate  >= '2018-12-25 00:00:00' AND PayDate < '2018-12-25 23:59:59' ) A
+                             ORDER BY SettleDate
+
+select * from BOW02010 where  OrdDate>='2018-12-20'
+
+select * from BIW02010 left join BPI01010 on BIW02010.patiid=BPI01010.patiid where  BeginDate>='2018-12-25'
+
+
+医疗高值耗材使用记录表：
+SELECT * FROM BSMS02081 WHERE SERIALNUMBER IS NOT NULL AND INOUTTYPE='Bill'
+
+药品入库信息记录表：
+SELECT * FROM BDM01020 WHERE DIRECT=1 AND INVPROPID='010102'
+
+药品出库信息记录表：
+SELECT * FROM BDM01020 WHERE DIRECT=-1 AND INVPROPID='010205'
+
+耗材入库信息记录表：
+SELECT * FROM BDM01020 WHERE DIRECT=1 AND INVPROPID='020102'
+
+耗材出库信息记录表：
+SELECT * FROM BDM01020 WHERE DIRECT=1 AND INVPROPID='01020300'
+
+Memory:
+INOUTDATE
