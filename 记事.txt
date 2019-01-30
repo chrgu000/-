@@ -1,3 +1,16 @@
+分金亭工号：收款员工号668密码728292
+1
+ww123456789
+
+医疗采集 http://192.168.2.63:8081/EIGMC/login 
+账号：syxzyy 密码：syxzyy
+
+江苏省医疗服务综合监管系统:   http://58.213.112.246/jsms/login.jsp
+账号：321322469673835
+密码：syzyy123456
+
+类型Bright用户名： NET 密码：Net123.com    IP地址：192.168.2.187 端口50000
+----------------------------------
 中医院随访系统    D:\vs\Suifang
 
 中医院客服系统    D:\vs\OldService\charisma-master
@@ -20,6 +33,12 @@
 
 小角色文件路径：服务器192.168.11.5:9003
 
+sql备份文件   	G:\备份
+
+微信支付服务	F:\VS\WXService\WebApplication1\WebApplication1
+
+mysql工具       E:\Navicat Premium\navicat.exe
+
 VS 模板路径：C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\ItemTemplatesCache\CSharp\Code\2052\Class
 
 dll反壳工具   F:\de4dot
@@ -38,7 +57,12 @@ D:\Administrator\workspace4	  小角色
 2.24 力软框架地址
 2.96 影像
 2.210 温湿度
-
+沭阳县中医院中间库
+MYSQL
+IP:(内网192.168.2.63)
+端口：3216
+数据库名：syzyy
+用户名/密码：syzyy/Syzyy@123
 
 门诊正扫
 http://ehospital.witontek.com/other/redirect/clinic-pay.html?hospital_id=syzyyadmin&channel=0&real_name=%E5%BC%A0%E6%AD%A3%E9%98%B3&patient_card=0011689875
