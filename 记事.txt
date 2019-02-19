@@ -1,3 +1,5 @@
+192.168.11.5服务器密码：1Qaz123.com
+
 分金亭工号：收款员工号668密码728292
 1
 ww123456789
@@ -23,13 +25,15 @@ ww123456789
 
 上传PDFDemo       D:\用户目录\我的文档\Visual Studio 2015\Projects\WindowsFormsApplication1
 
-沭阳中医院新做官网 D:\vs\ShuYang
+沭阳中医院新做官网 D:\vs\中医院网站\ShuYang
 
 移动护理webservice服务 D:\vs\Mobile移动护理webservice服务
 
 相册路径  D:\用户目录\我的文档\Tencent Files\272958293\FileRecv\MobileFile\WifiPhoto
 
 定时框架toshelf  F:\BaiduNetdiskDownload\Chapter08
+
+个人框架：F:\VS\MyFrame\HYY.Frame
 
 小角色文件路径：服务器192.168.11.5:9003
 
@@ -69,5 +73,14 @@ http://ehospital.witontek.com/other/redirect/clinic-pay.html?hospital_id=syzyyad
 
 住院正扫
 http://ehospital.witontek.com/other/redirect/clinic-pay.html?hospital_id=syzyyadmin&channel=1&id_card=320823194808103012&real_name=%E5%BC%A0%E6%AD%A3%E9%98%B3&serial_number=00457691
+
+---------------
+HYY.Frame 三层框架说明
+dal层： BaseDal 封装对数据库增删改查的具体方法
+	DbContextFactory 一次请求共用一个实例。上下文可以切换。使用原因：省略new DLNONLINEEntities();
+	dt_managerDal 代表每张表的具体实现
+Idal层:	因为dal层最终需要被bll层调用，为了追求层与层的隔离，通过依赖接口来减少层与层间的直接调用，为了以后减少		修改量
+	原来在bll层中，如果要实现dal层方法，必须要new dal层，现在直接来达到这个效果
+	为了封装BaseService，必须要有一个接口来接收不同的服务，例如userservice，orderservice，因此要新建		IBaseDal：抽象BaseDal 中的方法
 
 
