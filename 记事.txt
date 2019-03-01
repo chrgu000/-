@@ -1,3 +1,5 @@
+敏捷开发框架账户：system  密码：0000
+连接字符串：server=192.168.2.106;database=Bright_CB;uid=Bright;pwd=sa
 192.168.11.5服务器密码：1Qaz123.com
 
 分金亭工号：收款员工号668密码728292
