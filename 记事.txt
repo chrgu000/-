@@ -1,3 +1,24 @@
+%windir%/system32/inetsrv/appcmd.exe set config -section:system.webServer/httpCompression /-[name='xpress']
+IIS代码
+
+阿里云
+
+huanghongliang@gmail.com
+
+Dln123
+
+
+
+后台：http://www.hadln.com/ff0000/Login.aspx
+
+
+账号：admin     密码：shuyang
+
+
+OA 账号：0  密码：852000
+
+谷歌浏览器江苏省卫计人资系统http://58.213.112.246/rlzy/index，用户名320000003452，密码wangqin1
+
 敏捷开发框架账户：system  密码：0000
 连接字符串：server=192.168.2.106;database=Bright_CB;uid=Bright;pwd=sa
 192.168.11.5服务器密码：1Qaz123.com
@@ -18,6 +39,7 @@ ww123456789
 中医院随访系统    D:\vs\Suifang
 
 中医院客服系统    D:\vs\OldService\charisma-master
+                  D:\用户目录\我的文档\Visual Studio 2015\Projects\charisma-master
 
 妇幼客服系统      D:\vs\ShuYangFuYou
 
@@ -71,7 +93,19 @@ IP:(内网192.168.2.63)
 用户名/密码：syzyy/Syzyy@123
 
 门诊正扫
+https://web.witontek.com/clinic-pay?channel=0&new=1&hospital_id=医院ID&
+patient_card=就诊人卡号&real_name=就诊人姓名
+
+
+
+住院正扫
+https://web.witontek.com/clinic-pay?
+&channel=1&new=1&hospital_id=医院ID&id_card=身份证号&real_name=姓名&serial_number=住院号
+
+门诊正扫
 http://ehospital.witontek.com/other/redirect/clinic-pay.html?hospital_id=syzyyadmin&channel=0&real_name=%E5%BC%A0%E6%AD%A3%E9%98%B3&patient_card=0011689875
+
+
 
 住院正扫
 http://ehospital.witontek.com/other/redirect/clinic-pay.html?hospital_id=syzyyadmin&channel=1&id_card=320823194808103012&real_name=%E5%BC%A0%E6%AD%A3%E9%98%B3&serial_number=00457691
